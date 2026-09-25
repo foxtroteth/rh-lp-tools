@@ -67,13 +67,14 @@
 <main class="wrap">
   <h1>RH LP Tools</h1>
   <p class="lede">Uniswap V4 liquidity on Robinhood Chain, from your phone. Find USDG pools, open single-sided ladders, and claim, close or re-enter them, on iPhone (Scriptable) or Android (HTTP Shortcuts).</p>
+  <p class="small muted">Independent tools, named for the chain they work on. Not made by, endorsed by or affiliated with Robinhood, Uniswap or Scriptable.</p>
 
   <section class="card fee" id="fees" aria-labelledby="fee-h">
     <h2 id="fee-h" style="margin-top:0">Service fee</h2>
     <p style="margin-top:0">These scripts are free to download. Using them to transact charges a fee, the same on iPhone and Android:</p>
     <table>
-      <tr><td>Open a position<small>RH Pool zap, or re-entry / roll in RH Portfolio</small></td><td>0.3 USDG per open</td></tr>
-      <tr><td>Claim fees or close<small>RH Portfolio</small></td><td>1.5% of the LP fees collected</td></tr>
+      <tr><td>Open a position<small>Robinhood Pool zap, or re-entry / roll in Robinhood Portfolio</small></td><td>0.3 USDG per open</td></tr>
+      <tr><td>Claim fees or close<small>Robinhood Portfolio</small></td><td>1.5% of the LP fees collected</td></tr>
       <tr><td>Everything else<small>viewing, swaps, cleanup, practice mode</small></td><td>Free</td></tr>
     </table>
     <ul class="small">
@@ -90,23 +91,23 @@
   <h2>Download</h2>
   <h3>iPhone / iPad</h3>
   <div class="files" id="files">
-    <div class="card file" data-file="RH Secrets.js">
-      <div><div class="name">RH Secrets</div><div class="meta">Your keys and settings. Set up once, never replaced.</div></div>
+    <div class="card file" data-file="Robinhood Secrets.js">
+      <div><div class="name">Robinhood Secrets</div><div class="meta">Your keys and settings. Set up once, never replaced.</div></div>
       <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
     </div>
-    <div class="card file" data-file="RH Pool.js">
-      <div><div class="name">RH Pool</div><div class="meta">Ranks USDG pools by fee yield and opens ladders in one tap. <span data-ver></span></div></div>
+    <div class="card file" data-file="Robinhood Pool.js">
+      <div><div class="name">Robinhood Pool</div><div class="meta">Ranks USDG pools by fee yield and opens ladders in one tap. <span data-ver></span></div></div>
       <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
     </div>
-    <div class="card file" data-file="RH Portfolio.js">
-      <div><div class="name">RH Portfolio</div><div class="meta">Your positions, PnL and fees. Claim, close, swap and re-enter. <span data-ver></span></div></div>
+    <div class="card file" data-file="Robinhood Portfolio.js">
+      <div><div class="name">Robinhood Portfolio</div><div class="meta">Your positions, PnL and fees. Claim, close, swap and re-enter. <span data-ver></span></div></div>
       <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
     </div>
   </div>
   <h3>Android</h3>
   <div class="files">
     <div class="card file">
-      <div><div class="name">RH LP Tools for HTTP Shortcuts</div><div class="meta">RH Pool and RH Portfolio, plus two widget refreshers. One tap installs them, and the same tap updates them later.</div></div>
+      <div><div class="name">RH LP Tools for HTTP Shortcuts</div><div class="meta">Robinhood Pool and Robinhood Portfolio, plus two widget refreshers. One tap installs them, and the same tap updates them later.</div></div>
       <div class="btns"><a class="btn primary" id="android-install" href="#">Install on Android</a><a class="btn" href="android/rh-lp-tools-android.zip">File</a></div>
     </div>
   </div>
@@ -123,49 +124,50 @@
     <h3>1. Install Scriptable</h3>
     <p>Get <strong>Scriptable</strong> by Simon Støvring from the App Store. It is free, and it is what runs these scripts on your phone.</p>
 
-    <h3>2. Create RH Secrets</h3>
+    <h3>2. Create Robinhood Secrets</h3>
     <ol>
-      <li>Open this page in Safari on the same phone. Under <em>Download</em>, tap <strong>Copy code</strong> next to RH Secrets.</li>
+      <li>Open this page in Safari on the same phone. Under <em>Download</em>, tap <strong>Copy code</strong> next to Robinhood Secrets.</li>
       <li>Open Scriptable and tap <strong>+</strong> (top right). A blank script opens.</li>
       <li>Long-press in the editor and tap <strong>Paste</strong>.</li>
-      <li>Tap the title at the top of the editor and rename it to exactly <code>RH Secrets</code>, with the space and capitals. The other two scripts find it by that name.</li>
+      <li>Tap the title at the top of the editor and rename it to exactly <code>Robinhood Secrets</code>, with the space and capitals. The other two scripts find it by that name.</li>
       <li>Fill in your keys between the quotes (see <a href="#keys">Getting your keys</a>). Leave <code>PRACTICE_MODE: true</code>.</li>
       <li>Tap <strong>Done</strong>.</li>
     </ol>
 
-    <h3>3. Create RH Pool and RH Portfolio</h3>
+    <h3>3. Create Robinhood Pool and Robinhood Portfolio</h3>
     <ol>
-      <li>Back on this page, tap <strong>Copy code</strong> next to RH Pool.</li>
-      <li>In Scriptable, tap <strong>+</strong>, paste, rename it to exactly <code>RH Pool</code>, tap <strong>Done</strong>.</li>
-      <li>Do the same for <code>RH Portfolio</code>.</li>
+      <li>Back on this page, tap <strong>Copy code</strong> next to Robinhood Pool.</li>
+      <li>In Scriptable, tap <strong>+</strong>, paste, rename it to exactly <code>Robinhood Pool</code>, tap <strong>Done</strong>.</li>
+      <li>Do the same for <code>Robinhood Portfolio</code>.</li>
     </ol>
     <p class="small muted">These are large files. If the paste looks cut off, scroll to the bottom of the script: the last line should be <code>Script.complete();</code>. If not, copy and paste again.</p>
 
     <h3>4. Practice run</h3>
     <ol>
-      <li>Tap <strong>RH Pool</strong> in Scriptable's list to run it. The pool table loads (the first load can take a minute).</li>
+      <li>Tap <strong>Robinhood Pool</strong> in Scriptable's list to run it. The pool table loads (the first load can take a minute).</li>
       <li>Tap a zap button on any pool. It shows the plan, the gas and the 0.3 USDG service fee, and sends nothing.</li>
-      <li>Run <strong>RH Portfolio</strong> the same way and try Claim and Close on a position if you have one.</li>
-      <li>When the numbers look right, open RH Secrets, change <code>PRACTICE_MODE: true</code> to <code>false</code>, tap <strong>Done</strong>. From then on the buttons really send.</li>
+      <li>Run <strong>Robinhood Portfolio</strong> the same way and try Claim and Close on a position if you have one.</li>
+      <li>When the numbers look right, open Robinhood Secrets, change <code>PRACTICE_MODE: true</code> to <code>false</code>, tap <strong>Done</strong>. From then on the buttons really send.</li>
     </ol>
 
     <h3>5. Home screen widget (optional)</h3>
     <ol>
       <li>Long-press an empty spot on your home screen until the icons wiggle, then tap <strong>Edit</strong> or <strong>+</strong> (top left).</li>
       <li>Search <strong>Scriptable</strong>, choose the <strong>Medium</strong> or <strong>Large</strong> size, tap <strong>Add Widget</strong>.</li>
-      <li>Long-press the new widget, tap <strong>Edit Widget</strong>, set <strong>Script</strong> to RH Pool or RH Portfolio, and set <strong>When Interacting</strong> to <em>Run Script</em>.</li>
+      <li>Long-press the new widget, tap <strong>Edit Widget</strong>, set <strong>Script</strong> to Robinhood Pool or Robinhood Portfolio, and set <strong>When Interacting</strong> to <em>Run Script</em>.</li>
       <li>Tap outside to finish. The widget refreshes on its own; tapping it opens the full table, where the buttons are.</li>
     </ol>
     <p class="small muted">Widgets only display. Opening, claiming and closing always happen in the full table, after a confirmation.</p>
 
     <h3>Updating</h3>
-    <p>Tap <strong>Copy code</strong> for the script that changed, open it in Scriptable, select all (long-press, <em>Select All</em>), paste over it, tap <strong>Done</strong>. Never replace RH Secrets: your keys and presets live there.</p>
+    <p>Tap <strong>Copy code</strong> for the script that changed, open it in Scriptable, select all (long-press, <em>Select All</em>), paste over it, tap <strong>Done</strong>. Never replace Robinhood Secrets: your keys and presets live there.</p>
+    <p class="small muted">Set up before 26 September 2026, when the scripts were called RH Pool, RH Portfolio and RH Secrets? Rename RH Secrets to <code>Robinhood Secrets</code> (your keys stay in it), add the two new scripts as <code>Robinhood Pool</code> and <code>Robinhood Portfolio</code>, delete the old two, and point any widget at the new names.</p>
 
     <h3>If something goes wrong</h3>
     <ul class="small">
-      <li><strong>"Open buttons are off", "Set a wallet" or no buttons:</strong> RH Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
+      <li><strong>"Open buttons are off", "Set a wallet" or no buttons:</strong> Robinhood Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
       <li><strong>"ALCHEMY_API_KEY is required":</strong> the Alchemy key is missing, or you pasted the whole URL instead of just the key.</li>
-      <li><strong>"Uniswap API key required":</strong> fill in <code>UNISWAP_API_KEY</code> in RH Secrets and run the script again.</li>
+      <li><strong>"Uniswap API key required":</strong> fill in <code>UNISWAP_API_KEY</code> in Robinhood Secrets and run the script again.</li>
       <li><strong>Balance shows but no positions:</strong> add a Blockscout key, then close and re-run the script.</li>
       <li><strong>Widget says it can't find a script:</strong> the widget's Script setting points at an old name. Pick it again.</li>
     </ul>
@@ -181,17 +183,17 @@
     <ol>
       <li>Open this page on the phone. Under <em>Download</em>, tap <strong>Install on Android</strong>.</li>
       <li>HTTP Shortcuts opens <em>Import from URL</em> with the address already filled in. Tap <strong>OK</strong>. It says <em>4 shortcuts imported</em>.</li>
-      <li>You now have a category called <strong>RH LP Tools</strong> with RH Pool, RH Portfolio and two widget refreshers.</li>
+      <li>You now have a category called <strong>RH LP Tools</strong> with Robinhood Pool, Robinhood Portfolio and two widget refreshers.</li>
     </ol>
     <p class="small muted">If the button opens a web page instead of the app, open HTTP Shortcuts yourself, go to the menu (⋮) → <em>Import / Export</em> → <em>Import from URL</em>, and paste <code>https://foxtroteth.github.io/rh-lp-tools/android/rh-lp-tools-android.zip</code>.</p>
 
     <h3>3. Enter your keys</h3>
     <ol>
-      <li>Tap <strong>RH Pool</strong>. The first time it offers to set up: tap <strong>Set up now</strong>.</li>
+      <li>Tap <strong>Robinhood Pool</strong>. The first time it offers to set up: tap <strong>Set up now</strong>.</li>
       <li>Paste each key when asked: Alchemy, your wallet private key, Blockscout, then Uniswap (see <a href="#keys">Getting your keys</a>). The Uniswap key is required: without it the scripts stop and ask for it.</li>
       <li>Practice mode starts <strong>on</strong>: nothing is sent while you try things out.</li>
     </ol>
-    <p class="small muted">Change any of them later from <strong>⚙️ Settings</strong>, at the bottom of either script's page. RH Pool and RH Portfolio share the same settings.</p>
+    <p class="small muted">Change any of them later from <strong>⚙️ Settings</strong>, at the bottom of either script's page. Robinhood Pool and Robinhood Portfolio share the same settings.</p>
 
     <h3>4. Using it</h3>
     <ul>
@@ -199,26 +201,27 @@
       <li>At the top: <strong>↻ Refresh</strong>, <strong>🔎 Search</strong> and the <strong>Sort</strong> buttons. At the bottom: <strong>⚙️ Settings</strong>. Close the page with <strong>✕</strong> in its top corner.</li>
       <li>The <strong>first</strong> time you tap a button, the app asks whether to open the link. Tick <strong>Don't show again</strong> and tap <strong>OK</strong>; after that, buttons respond straight away.</li>
       <li>Every action asks first, showing the gas and the service fee. When it finishes, the page comes back with the result at the top.</li>
-      <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. RH Pool's buttons then answer in a second or two; RH Portfolio's reload your positions first, so they take a few seconds.</li>
+      <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. Robinhood Pool's buttons then answer in a second or two; Robinhood Portfolio's reload your positions first, so they take a few seconds.</li>
     </ul>
 
     <h3>5. Practice, then go live</h3>
     <ol>
-      <li>Try a zap in RH Pool and a claim in RH Portfolio. They show the plan, the gas and the fee, and send nothing.</li>
+      <li>Try a zap in Robinhood Pool and a claim in Robinhood Portfolio. They show the plan, the gas and the fee, and send nothing.</li>
       <li>When the numbers look right: ⚙️ Settings (bottom of the page) → <strong>Practice mode</strong> → <strong>Turn off</strong>.</li>
     </ol>
 
     <h3>6. Home screen (optional)</h3>
     <ol>
-      <li>In HTTP Shortcuts, long-press RH Pool or RH Portfolio and choose <strong>Place on Home Screen</strong> for an icon that opens it.</li>
+      <li>In HTTP Shortcuts, long-press Robinhood Pool or Robinhood Portfolio and choose <strong>Place on Home Screen</strong> for an icon that opens it.</li>
       <li>For a summary widget: long-press an empty spot on the home screen → <strong>Widgets</strong> → HTTP Shortcuts → <strong>Variable Widget</strong> → Add.</li>
-      <li>Set <strong>Global Variable</strong> to <code>RH_PORTFOLIO_WIDGET</code> (or <code>RH_POOL_WIDGET</code>), and <strong>When clicked, run shortcut</strong> to RH Portfolio (or RH Pool). Tap ✓. Make it bigger if the text is cut off.</li>
-      <li>It updates every time you open that shortcut. To refresh it in the background as well, edit <em>RH Portfolio Widget</em> → <em>Trigger &amp; Execution Settings</em> → <em>Run repeatedly</em>. That costs battery.</li>
+      <li>Set <strong>Global Variable</strong> to <code>RH_PORTFOLIO_WIDGET</code> (or <code>RH_POOL_WIDGET</code>), and <strong>When clicked, run shortcut</strong> to Robinhood Portfolio (or Robinhood Pool). Tap ✓. Make it bigger if the text is cut off.</li>
+      <li>It updates every time you open that shortcut. To refresh it in the background as well, edit <em>Robinhood Portfolio Widget</em> → <em>Trigger &amp; Execution Settings</em> → <em>Run repeatedly</em>. That costs battery.</li>
     </ol>
     <p class="small"><strong>Only ever choose an RH_…_WIDGET variable for a widget.</strong> A widget shows its variable's value on your home screen, and the same list also holds your keys.</p>
 
     <h3>Updating</h3>
-    <p>Tap <strong>Install on Android</strong> again. The import replaces RH Pool and RH Portfolio with the new version and keeps your keys, settings and saved data.</p>
+    <p>Tap <strong>Install on Android</strong> again. The import replaces Robinhood Pool and Robinhood Portfolio with the new version and keeps your keys, settings and saved data.</p>
+    <p class="small muted">Installed before 26 September 2026, when they were called RH Pool and RH Portfolio? The same import renames them and keeps everything. A home-screen icon may keep its old label until you place it again.</p>
 
     <h3>Your keys on Android</h3>
     <ul class="small">
@@ -231,21 +234,21 @@
     <h3>If something goes wrong</h3>
     <ul class="small">
       <li><strong>Import fails with a version message:</strong> update HTTP Shortcuts from Google Play and tap Install on Android again.</li>
-      <li><strong>No ⚡ buttons on RH Pool ("Open buttons are off"):</strong> the wallet private key is not set. Tap <strong>⚙️ Open Settings</strong> on that card and add it; the buttons appear when the page comes back.</li>
-      <li><strong>"Add your wallet's private key in ⚙️ Settings":</strong> RH Portfolio needs the key to list and manage positions. A watch-only address is used by the widget only.</li>
+      <li><strong>No ⚡ buttons on Robinhood Pool ("Open buttons are off"):</strong> the wallet private key is not set. Tap <strong>⚙️ Open Settings</strong> on that card and add it; the buttons appear when the page comes back.</li>
+      <li><strong>"Add your wallet's private key in ⚙️ Settings":</strong> Robinhood Portfolio needs the key to list and manage positions. A watch-only address is used by the widget only.</li>
       <li><strong>"Variable not found":</strong> an <code>RH_</code> variable was deleted. Tap Install on Android again to restore it.</li>
       <li><strong>Slow or timed out:</strong> the app gives each request 10 seconds. Add a Blockscout key, and try again on a better connection.</li>
     </ul>
   </section>
 
   <h2 id="keys">Getting your keys</h2>
-  <p class="small muted">On iPhone they go into RH Secrets. On Android the first run asks for them, and ⚙️ Settings changes them.</p>
+  <p class="small muted">On iPhone they go into Robinhood Secrets. On Android the first run asks for them, and ⚙️ Settings changes them.</p>
   <h3>Alchemy (required)</h3>
   <p>Sign up free at alchemy.com, create an app on <strong>Robinhood Chain</strong>, and copy the API key (the short string, not the URL) into <code>ALCHEMY_API_KEY</code>.</p>
   <h3>Wallet private key (required to transact)</h3>
-  <p>Use a <strong>fresh wallet you keep only for this</strong>, holding only what you are willing to risk. The key stays on your phone: the scripts use it to sign locally and never send it anywhere. Anyone who can read the file can spend that wallet, so never share RH Secrets or paste the key anywhere else.</p>
+  <p>Use a <strong>fresh wallet you keep only for this</strong>, holding only what you are willing to risk. The key stays on your phone: the scripts use it to sign locally and never send it anywhere. Anyone who can read the file can spend that wallet, so never share Robinhood Secrets or paste the key anywhere else.</p>
   <h3>Uniswap (required)</h3>
-  <p>Free at hub.uniswap.org: sign in, create an API key and copy it into <code>UNISWAP_API_KEY</code>. RH Pool and RH Portfolio do not start without it.</p>
+  <p>Free at hub.uniswap.org: sign in, create an API key and copy it into <code>UNISWAP_API_KEY</code>. Robinhood Pool and Robinhood Portfolio do not start without it.</p>
   <h3>Blockscout (strongly recommended)</h3>
   <p>Free at blockscout.com. Without it, position lookups fall back to a public explorer that often times out: the symptom is a wallet that shows a balance but no positions.</p>
 
@@ -253,13 +256,13 @@
   <details><summary>What does "single-sided ladder" mean?</summary>
     <p>You deposit only USDG, split across several slices placed below the current price. Nothing is bought up front, so there is no slippage on entry. The ladder earns fees only once the price falls into it, and as it does, your USDG is converted into the token.</p></details>
   <details><summary>How is the 1.5% worked out exactly?</summary>
-    <p>Right before sending, RH Portfolio reads each position's uncollected fees from the chain, values any non-USDG part at the pool's current price, and takes 1.5% of the total, rounded up to the nearest 0.000001 USDG. That amount is paid to the fee wallet in the same transaction that collects the fees.</p></details>
+    <p>Right before sending, Robinhood Portfolio reads each position's uncollected fees from the chain, values any non-USDG part at the pool's current price, and takes 1.5% of the total, rounded up to the nearest 0.000001 USDG. That amount is paid to the fee wallet in the same transaction that collects the fees.</p></details>
   <details><summary>Does re-entering or rolling cost both fees?</summary>
     <p>Yes. A re-entry closes a ladder and opens a new one in one transaction, so it pays 1.5% of the fees collected plus 0.3 USDG for the re-open. A roll is the same, in separate steps.</p></details>
   <details><summary>Positions don't show up</summary>
     <p>Add a Blockscout key. The public explorer is slow and unreliable; with a key, lookups are fast. Newly opened positions can also take a minute to be indexed.</p></details>
   <details><summary>How do I update?</summary>
-    <p>Copy the new code for RH Pool or RH Portfolio and paste it over the old script. RH Secrets is never replaced, so your keys and presets carry over.</p></details>
+    <p>Copy the new code for Robinhood Pool or Robinhood Portfolio and paste it over the old script. Robinhood Secrets is never replaced, so your keys and presets carry over.</p></details>
 
   <h2>Risks</h2>
   <ul class="small">

@@ -1,14 +1,18 @@
 // ============================================================================
-//  RH Secrets
+//  Robinhood Secrets
 //  ---------------------------------------------------------------------------
-//  Set this up ONCE. "RH Pool" and "RH Portfolio" both read from it, so when a
-//  new build of those arrives you paste it straight over the old one and
-//  nothing here is touched: your keys and your presets survive every update.
+//  Name this script exactly "Robinhood Secrets".
+//
+//  Set this up ONCE. "Robinhood Pool" and "Robinhood Portfolio" both read from
+//  it, so when a new build of those arrives you paste it straight over the old
+//  one and nothing here is touched: your keys and your presets survive every
+//  update.
 //
 //  This file is never shared and never updated. Keep it on your phone only.
 //  Anyone who reads PRIVATE_KEY below can spend everything in that wallet.
 //
-//  Service fee (charged by RH Pool and RH Portfolio, not by this file):
+//  Service fee (charged by Robinhood Pool and Robinhood Portfolio, not by
+//  this file):
 //    open a position          0.3 USDG per open
 //    claim fees or close      1.5% of the LP fees collected, paid in USDG
 //  Both are paid inside the same transaction as the action itself, and shown
@@ -41,7 +45,7 @@ module.exports = {
 
   // -- 4. Uniswap. Required. --------------------------------------------------
   // Free at hub.uniswap.org: sign in, create an API key and paste it here.
-  // RH Pool and RH Portfolio do not start without it.
+  // Robinhood Pool and Robinhood Portfolio do not start without it.
   UNISWAP_API_KEY: "",
 
   // -- 5. Practice mode. ------------------------------------------------------
