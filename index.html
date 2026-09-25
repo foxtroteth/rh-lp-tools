@@ -46,7 +46,7 @@
   .btns { display: flex; gap: 8px; }
   button, .btn { appearance: none; border: 1px solid var(--line); background: var(--card); color: var(--ink);
     border-radius: 10px; padding: 9px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; }
-  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  button.primary, .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   button:disabled { opacity: 0.5; cursor: default; }
   ol, ul { padding-left: 22px; }
   li { margin: 6px 0; }
@@ -66,11 +66,11 @@
 <body>
 <main class="wrap">
   <h1>RH LP Tools</h1>
-  <p class="lede">Scriptable scripts for Uniswap V4 liquidity on Robinhood Chain. Find USDG pools, open single-sided ladders, and claim, close or re-enter them from your iPhone.</p>
+  <p class="lede">Uniswap V4 liquidity on Robinhood Chain, from your phone. Find USDG pools, open single-sided ladders, and claim, close or re-enter them, on iPhone (Scriptable) or Android (HTTP Shortcuts).</p>
 
   <section class="card fee" id="fees" aria-labelledby="fee-h">
     <h2 id="fee-h" style="margin-top:0">Service fee</h2>
-    <p style="margin-top:0">These scripts are free to download. Using them to transact charges a fee:</p>
+    <p style="margin-top:0">These scripts are free to download. Using them to transact charges a fee, the same on iPhone and Android:</p>
     <table>
       <tr><td>Open a position<small>RH Pool zap, or re-entry / roll in RH Portfolio</small></td><td>0.3 USDG per open</td></tr>
       <tr><td>Claim fees or close<small>RH Portfolio</small></td><td>1.5% of the LP fees collected</td></tr>
@@ -84,10 +84,11 @@
     </ul>
     <p class="small" style="margin-bottom:4px">Fees go to:</p>
     <span class="addr mono">0x95483e739bdbd2496ef569eaf1612370501011d1</span>
-    <p class="small muted" style="margin-bottom:0">You can check this yourself: open either script and search for <code>SERVICE_FEE_WALLET</code>.</p>
+    <p class="small muted" style="margin-bottom:0">You can check this yourself: open either script (on Android, the shortcut's code) and search for <code>SERVICE_FEE_WALLET</code>.</p>
   </section>
 
   <h2>Download</h2>
+  <h3>iPhone / iPad</h3>
   <div class="files" id="files">
     <div class="card file" data-file="RH Secrets.js">
       <div><div class="name">RH Secrets</div><div class="meta">Your keys and settings. Set up once, never replaced.</div></div>
@@ -100,6 +101,13 @@
     <div class="card file" data-file="RH Portfolio.js">
       <div><div class="name">RH Portfolio</div><div class="meta">Your positions, PnL and fees. Claim, close, swap and re-enter. <span data-ver></span></div></div>
       <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
+    </div>
+  </div>
+  <h3>Android</h3>
+  <div class="files">
+    <div class="card file">
+      <div><div class="name">RH LP Tools for HTTP Shortcuts</div><div class="meta">RH Pool and RH Portfolio, plus two widget refreshers. One tap installs them, and the same tap updates them later.</div></div>
+      <div class="btns"><a class="btn primary" id="android-install" href="#">Install on Android</a><a class="btn" href="android/rh-lp-tools-android.zip">File</a></div>
     </div>
   </div>
 
@@ -163,20 +171,72 @@
   </section>
 
   <section id="pane-android" role="tabpanel" aria-labelledby="tab-android" hidden>
-    <div class="card fee">
-      <h3 style="margin-top:0">Not available on Android yet</h3>
-      <p>RH Pool and RH Portfolio run inside <strong>Scriptable</strong>, an app that exists only on iPhone and iPad. The scripts use Scriptable's own tables, dialogs, storage and widgets, so there is no Android app that can run them as they are.</p>
-      <p style="margin-bottom:0"><strong>Do not paste these scripts, or your private key, into an Android "JavaScript runner" or any other app that claims to run them.</strong> It will not work, and you would be handing that app the key to your wallet.</p>
-    </div>
-    <h3>What you can do instead</h3>
+    <p class="muted small">About 10 minutes. You need Android 8 or newer, a little ETH on Robinhood Chain for gas, and USDG to deposit.</p>
+
+    <h3>1. Install HTTP Shortcuts</h3>
+    <p>Get <strong>HTTP Shortcuts</strong> by Roland Meyer from <a href="https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts">Google Play</a>. It is free and open source, and it is what runs the Android version of these scripts. You need version 4.7.0 or newer; if the import below says the file is too new, update the app.</p>
+
+    <h3>2. Import RH LP Tools</h3>
+    <ol>
+      <li>Open this page on the phone. Under <em>Download</em>, tap <strong>Install on Android</strong>.</li>
+      <li>HTTP Shortcuts opens <em>Import from URL</em> with the address already filled in. Tap <strong>OK</strong>. It says <em>4 shortcuts imported</em>.</li>
+      <li>You now have a category called <strong>RH LP Tools</strong> with RH Pool, RH Portfolio and two widget refreshers.</li>
+    </ol>
+    <p class="small muted">If the button opens a web page instead of the app, open HTTP Shortcuts yourself, go to the menu (⋮) → <em>Import / Export</em> → <em>Import from URL</em>, and paste <code>https://foxtroteth.github.io/rh-lp-tools/android/rh-lp-tools-android.zip</code>.</p>
+
+    <h3>3. Enter your keys</h3>
+    <ol>
+      <li>Tap <strong>RH Pool</strong>. The first time it offers to set up: tap <strong>Set up now</strong>.</li>
+      <li>Paste each key when asked: Alchemy, then your wallet private key, then Blockscout (see <a href="#keys">Getting your keys</a>). The Uniswap key is optional; tap Cancel to skip it.</li>
+      <li>Practice mode starts <strong>on</strong>: nothing is sent while you try things out.</li>
+    </ol>
+    <p class="small muted">Change any of them later from <strong>⚙️ Settings</strong>, at the bottom of either script's menu. RH Pool and RH Portfolio share the same settings.</p>
+
+    <h3>4. Using it</h3>
     <ul>
-      <li><strong>Use an iPad or an old iPhone.</strong> Anything on iOS 14 or newer runs Scriptable. It does not need a SIM, just Wi-Fi. Follow the iPhone / iPad guide on that device.</li>
-      <li><strong>Check back.</strong> An Android version is being considered. This page will have a guide here when it exists.</li>
+      <li>On Android the table is a menu. Each pool, or each position, is one entry: tap it to see what you can do with it, such as the ⚡️ zap presets, ✏️ Custom, Re-enter, Claim, Close, or 🔗 open it in DexScreener.</li>
+      <li><strong>📄 Full table</strong> shows everything the iPhone table shows, in colour.</li>
+      <li>Every action asks first, showing the gas and the service fee, and shows each step once it finishes.</li>
+      <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. Later opens start from saved data and are quicker.</li>
     </ul>
-    <p class="small muted">Your Android phone can still show this page and the fee terms. Only running the scripts needs iOS.</p>
+
+    <h3>5. Practice, then go live</h3>
+    <ol>
+      <li>Try a zap in RH Pool and a claim in RH Portfolio. They show the plan, the gas and the fee, and send nothing.</li>
+      <li>When the numbers look right: ⚙️ Settings → <strong>Practice mode</strong> → <strong>Turn off</strong>. Close the shortcut and open it again.</li>
+    </ol>
+
+    <h3>6. Home screen (optional)</h3>
+    <ol>
+      <li>In HTTP Shortcuts, long-press RH Pool or RH Portfolio and choose <strong>Place on Home Screen</strong> for an icon that opens it.</li>
+      <li>For a summary widget: long-press an empty spot on the home screen → <strong>Widgets</strong> → HTTP Shortcuts → <strong>Variable Widget</strong> → Add.</li>
+      <li>Set <strong>Global Variable</strong> to <code>RH_PORTFOLIO_WIDGET</code> (or <code>RH_POOL_WIDGET</code>), and <strong>When clicked, run shortcut</strong> to RH Portfolio (or RH Pool). Tap ✓. Make it bigger if the text is cut off.</li>
+      <li>It updates every time you open that shortcut. To refresh it in the background as well, edit <em>RH Portfolio Widget</em> → <em>Trigger &amp; Execution Settings</em> → <em>Run repeatedly</em>. That costs battery.</li>
+    </ol>
+    <p class="small"><strong>Only ever choose an RH_…_WIDGET variable for a widget.</strong> A widget shows its variable's value on your home screen, and the same list also holds your keys.</p>
+
+    <h3>Updating</h3>
+    <p>Tap <strong>Install on Android</strong> again. The import replaces RH Pool and RH Portfolio with the new version and keeps your keys, settings and saved data.</p>
+
+    <h3>Your keys on Android</h3>
+    <ul class="small">
+      <li>They are stored inside HTTP Shortcuts on this phone, marked secret (hidden in its variable editor and event history) and left out of its exports, so sharing or backing up your shortcuts from the app never includes them.</li>
+      <li>Android's own backup of app data can include HTTP Shortcuts, and with it the saved key. On Android 9 and newer that backup is end-to-end encrypted with your screen lock. If that is not acceptable, use a phone kept only for this.</li>
+      <li>Do not delete the <code>RH_</code> variables in <em>Global Variables</em>: the scripts need them. Removing the key the right way is ⚙️ Settings → <em>Remove the private key</em>.</li>
+      <li>Only import RH LP Tools from this page. A shortcut file from anywhere else can read every variable in the app, keys included.</li>
+    </ul>
+
+    <h3>If something goes wrong</h3>
+    <ul class="small">
+      <li><strong>Import fails with a version message:</strong> update HTTP Shortcuts from Google Play and tap Install on Android again.</li>
+      <li><strong>"Add your wallet's private key in ⚙️ Settings":</strong> RH Portfolio needs the key to list and manage positions. A watch-only address is used by the widget only.</li>
+      <li><strong>"Variable not found":</strong> an <code>RH_</code> variable was deleted. Tap Install on Android again to restore it.</li>
+      <li><strong>Slow or timed out:</strong> the app gives each request 10 seconds. Add a Blockscout key, and try again on a better connection.</li>
+    </ul>
   </section>
 
   <h2 id="keys">Getting your keys</h2>
+  <p class="small muted">On iPhone they go into RH Secrets. On Android the first run asks for them, and ⚙️ Settings changes them.</p>
   <h3>Alchemy (required)</h3>
   <p>Sign up free at alchemy.com, create an app on <strong>Robinhood Chain</strong>, and copy the API key (the short string, not the URL) into <code>ALCHEMY_API_KEY</code>.</p>
   <h3>Wallet private key (required to transact)</h3>
@@ -219,6 +279,12 @@
   };
   for (const k of Object.keys(tabs)) document.getElementById("tab-" + k).addEventListener("click", () => pick(k));
   if (/android/i.test(navigator.userAgent) || location.hash === "#android") pick("android");
+
+  // The app's own import link: on a phone with HTTP Shortcuts it opens the
+  // import dialog directly; elsewhere it shows the app's instructions.
+  const zip = new URL("android/rh-lp-tools-android.zip", location.href).href;
+  document.getElementById("android-install").href =
+    "https://http-shortcuts.rmy.ch/import?url=" + encodeURIComponent(zip);
 
   // Fetched once on load so "Copy code" can write to the clipboard straight
   // from the tap. iOS Safari drops clipboard access if a fetch runs first.
