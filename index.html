@@ -55,6 +55,10 @@
   summary { cursor: pointer; font-weight: 600; }
   .muted { color: var(--muted); }
   .small { font-size: 14px; }
+  .tabs { display: flex; gap: 6px; margin: 0 0 16px; border-bottom: 1px solid var(--line); }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none;
+    padding: 10px 12px; color: var(--muted); }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
   footer { margin-top: 48px; color: var(--muted); font-size: 13px; }
   a { color: var(--accent); }
 </style>
@@ -99,18 +103,80 @@
     </div>
   </div>
 
-  <h2>Setting up</h2>
-  <ol>
-    <li>Install <strong>Scriptable</strong> from the App Store (free).</li>
-    <li>In Scriptable, tap <strong>+</strong> to make a new script. Name it exactly <code>RH Secrets</code>. Tap <em>Copy code</em> above for RH Secrets and paste it in.</li>
-    <li>Fill in your keys in RH Secrets (see below). Leave <code>PRACTICE_MODE: true</code> for now.</li>
-    <li>Make two more scripts named exactly <code>RH Pool</code> and <code>RH Portfolio</code>, and paste each one's code in.</li>
-    <li>Run each script once from inside Scriptable. Try every button in practice mode: it shows the plan, the gas and the service fee, and sends nothing.</li>
-    <li>When the numbers look right, set <code>PRACTICE_MODE: false</code> in RH Secrets.</li>
-    <li>Optional: add a Scriptable widget to your home screen and pick RH Pool or RH Portfolio as its script.</li>
-  </ol>
+  <h2 id="guide">Setting up</h2>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-ios" aria-controls="pane-ios" aria-selected="true">iPhone / iPad</button>
+    <button role="tab" id="tab-android" aria-controls="pane-android" aria-selected="false">Android</button>
+  </div>
 
-  <h2>Getting your keys</h2>
+  <section id="pane-ios" role="tabpanel" aria-labelledby="tab-ios">
+    <p class="muted small">About 10 minutes. You need iOS 14 or newer, a little ETH on Robinhood Chain for gas, and USDG to deposit.</p>
+
+    <h3>1. Install Scriptable</h3>
+    <p>Get <strong>Scriptable</strong> by Simon Støvring from the App Store. It is free, and it is what runs these scripts on your phone.</p>
+
+    <h3>2. Create RH Secrets</h3>
+    <ol>
+      <li>Open this page in Safari on the same phone. Under <em>Download</em>, tap <strong>Copy code</strong> next to RH Secrets.</li>
+      <li>Open Scriptable and tap <strong>+</strong> (top right). A blank script opens.</li>
+      <li>Long-press in the editor and tap <strong>Paste</strong>.</li>
+      <li>Tap the title at the top of the editor and rename it to exactly <code>RH Secrets</code>, with the space and capitals. The other two scripts find it by that name.</li>
+      <li>Fill in your keys between the quotes (see <a href="#keys">Getting your keys</a>). Leave <code>PRACTICE_MODE: true</code>.</li>
+      <li>Tap <strong>Done</strong>.</li>
+    </ol>
+
+    <h3>3. Create RH Pool and RH Portfolio</h3>
+    <ol>
+      <li>Back on this page, tap <strong>Copy code</strong> next to RH Pool.</li>
+      <li>In Scriptable, tap <strong>+</strong>, paste, rename it to exactly <code>RH Pool</code>, tap <strong>Done</strong>.</li>
+      <li>Do the same for <code>RH Portfolio</code>.</li>
+    </ol>
+    <p class="small muted">These are large files. If the paste looks cut off, scroll to the bottom of the script: the last line should be <code>Script.complete();</code>. If not, copy and paste again.</p>
+
+    <h3>4. Practice run</h3>
+    <ol>
+      <li>Tap <strong>RH Pool</strong> in Scriptable's list to run it. The pool table loads (the first load can take a minute).</li>
+      <li>Tap a zap button on any pool. It shows the plan, the gas and the 0.3 USDG service fee, and sends nothing.</li>
+      <li>Run <strong>RH Portfolio</strong> the same way and try Claim and Close on a position if you have one.</li>
+      <li>When the numbers look right, open RH Secrets, change <code>PRACTICE_MODE: true</code> to <code>false</code>, tap <strong>Done</strong>. From then on the buttons really send.</li>
+    </ol>
+
+    <h3>5. Home screen widget (optional)</h3>
+    <ol>
+      <li>Long-press an empty spot on your home screen until the icons wiggle, then tap <strong>Edit</strong> or <strong>+</strong> (top left).</li>
+      <li>Search <strong>Scriptable</strong>, choose the <strong>Medium</strong> or <strong>Large</strong> size, tap <strong>Add Widget</strong>.</li>
+      <li>Long-press the new widget, tap <strong>Edit Widget</strong>, set <strong>Script</strong> to RH Pool or RH Portfolio, and set <strong>When Interacting</strong> to <em>Run Script</em>.</li>
+      <li>Tap outside to finish. The widget refreshes on its own; tapping it opens the full table, where the buttons are.</li>
+    </ol>
+    <p class="small muted">Widgets only display. Opening, claiming and closing always happen in the full table, after a confirmation.</p>
+
+    <h3>Updating</h3>
+    <p>Tap <strong>Copy code</strong> for the script that changed, open it in Scriptable, select all (long-press, <em>Select All</em>), paste over it, tap <strong>Done</strong>. Never replace RH Secrets: your keys and presets live there.</p>
+
+    <h3>If something goes wrong</h3>
+    <ul class="small">
+      <li><strong>"Set a wallet" or no buttons:</strong> RH Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
+      <li><strong>"ALCHEMY_API_KEY is required":</strong> the Alchemy key is missing, or you pasted the whole URL instead of just the key.</li>
+      <li><strong>Balance shows but no positions:</strong> add a Blockscout key, then close and re-run the script.</li>
+      <li><strong>Widget says it can't find a script:</strong> the widget's Script setting points at an old name. Pick it again.</li>
+    </ul>
+  </section>
+
+  <section id="pane-android" role="tabpanel" aria-labelledby="tab-android" hidden>
+    <div class="card fee">
+      <h3 style="margin-top:0">Not available on Android yet</h3>
+      <p>RH Pool and RH Portfolio run inside <strong>Scriptable</strong>, an app that exists only on iPhone and iPad. The scripts use Scriptable's own tables, dialogs, storage and widgets, so there is no Android app that can run them as they are.</p>
+      <p style="margin-bottom:0"><strong>Do not paste these scripts, or your private key, into an Android "JavaScript runner" or any other app that claims to run them.</strong> It will not work, and you would be handing that app the key to your wallet.</p>
+    </div>
+    <h3>What you can do instead</h3>
+    <ul>
+      <li><strong>Use an iPad or an old iPhone.</strong> Anything on iOS 14 or newer runs Scriptable. It does not need a SIM, just Wi-Fi. Follow the iPhone / iPad guide on that device.</li>
+      <li><strong>Check back.</strong> An Android version is being considered. This page will have a guide here when it exists.</li>
+    </ul>
+    <p class="small muted">Your Android phone can still show this page and the fee terms. Only running the scripts needs iOS.</p>
+  </section>
+
+  <h2 id="keys">Getting your keys</h2>
   <h3>Alchemy (required)</h3>
   <p>Sign up free at alchemy.com, create an app on <strong>Robinhood Chain</strong>, and copy the API key (the short string, not the URL) into <code>ALCHEMY_API_KEY</code>.</p>
   <h3>Wallet private key (required to transact)</h3>
@@ -142,6 +208,18 @@
   <footer>Robinhood Chain (4663) · Uniswap V4 · not affiliated with Robinhood, Uniswap or Scriptable.</footer>
 </main>
 <script>
+  // Platform tabs. Android phones open on the Android tab, since the iPhone
+  // steps would otherwise read as if they applied.
+  const tabs = { ios: "pane-ios", android: "pane-android" };
+  const pick = (k) => {
+    for (const [name, pane] of Object.entries(tabs)) {
+      document.getElementById("tab-" + name).setAttribute("aria-selected", String(name === k));
+      document.getElementById(pane).hidden = name !== k;
+    }
+  };
+  for (const k of Object.keys(tabs)) document.getElementById("tab-" + k).addEventListener("click", () => pick(k));
+  if (/android/i.test(navigator.userAgent) || location.hash === "#android") pick("android");
+
   // Fetched once on load so "Copy code" can write to the clipboard straight
   // from the tap. iOS Safari drops clipboard access if a fetch runs first.
   const texts = {};
