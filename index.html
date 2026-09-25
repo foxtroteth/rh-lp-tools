@@ -163,7 +163,7 @@
 
     <h3>If something goes wrong</h3>
     <ul class="small">
-      <li><strong>"Set a wallet" or no buttons:</strong> RH Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
+      <li><strong>"Open buttons are off", "Set a wallet" or no buttons:</strong> RH Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
       <li><strong>"ALCHEMY_API_KEY is required":</strong> the Alchemy key is missing, or you pasted the whole URL instead of just the key.</li>
       <li><strong>"Uniswap API key required":</strong> fill in <code>UNISWAP_API_KEY</code> in RH Secrets and run the script again.</li>
       <li><strong>Balance shows but no positions:</strong> add a Blockscout key, then close and re-run the script.</li>
@@ -231,6 +231,7 @@
     <h3>If something goes wrong</h3>
     <ul class="small">
       <li><strong>Import fails with a version message:</strong> update HTTP Shortcuts from Google Play and tap Install on Android again.</li>
+      <li><strong>No ⚡ buttons on RH Pool ("Open buttons are off"):</strong> the wallet private key is not set. Tap <strong>⚙️ Open Settings</strong> on that card and add it; the buttons appear when the page comes back.</li>
       <li><strong>"Add your wallet's private key in ⚙️ Settings":</strong> RH Portfolio needs the key to list and manage positions. A watch-only address is used by the widget only.</li>
       <li><strong>"Variable not found":</strong> an <code>RH_</code> variable was deleted. Tap Install on Android again to restore it.</li>
       <li><strong>Slow or timed out:</strong> the app gives each request 10 seconds. Add a Blockscout key, and try again on a better connection.</li>

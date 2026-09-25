@@ -2221,7 +2221,8 @@ function normPriv(k) {
   const ORDER = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141n;
   return (n === 0n || n >= ORDER) ? null : x;
 }
-const PRIV = normPriv(secret(PRIVATE_KEY, "PRIVATE_KEY"));
+const _PRIV_RAW = String(secret(PRIVATE_KEY, "PRIVATE_KEY") || "").trim();
+const PRIV = normPriv(_PRIV_RAW);
 const WALLET = PRIV
   ? ("0x" + CRYPTO.keccak256(CRYPTO.secp.getPublicKey(PRIV, false).slice(1)).slice(-40)).toLowerCase()
   : null;
@@ -2229,6 +2230,11 @@ const _ALCHEMY = secret(ALCHEMY_API_KEY, "ALCHEMY_API_KEY");
 const ZAP_RPC = _ALCHEMY && /^[A-Za-z0-9_-]+$/.test(_ALCHEMY)
   ? "https://robinhood-mainnet.g.alchemy.com/v2/" + _ALCHEMY : "";
 const ZAP_READY = !!(PRIV && ZAP_RPC);
+// What the table lacks for its open buttons, named by the row standing in
+// for them.
+const ZAP_MISSING = ZAP_READY ? null
+  : !PRIV ? (_PRIV_RAW ? "a valid PRIVATE_KEY" : "PRIVATE_KEY")
+  : "ALCHEMY_API_KEY";
 
 // Used by the receipt poll in sendTx.
 function pause(ms) { return new Promise(r => Timer.schedule(ms, false, r)); }
@@ -3885,6 +3891,19 @@ function fillTable(t, d, stale, dataTime, refreshing, error, onRefresh, _sortCol
   }
 
   statusRow(t, refreshing ? "refreshing" : stale ? "stale" : "fresh", statusText(stale, dataTime, refreshing, error), onRefresh, d.gas);
+
+  // Read-only without a key. This row stands where the open buttons would be,
+  // so their absence reads as a setting rather than a broken table.
+  if (!onZap && ZAP_MISSING) {
+    const kr = new UITableRow();
+    kr.height = 44;
+    const kc = kr.addText("⚡️ Open buttons are off", `Add ${ZAP_MISSING} to RH Secrets to open positions.`);
+    kc.titleFont = Font.semiboldSystemFont(14);
+    kc.titleColor = COL.yellow;
+    kc.subtitleFont = Font.systemFont(11);
+    kc.subtitleColor = COL.muted;
+    t.addRow(kr);
+  }
 
   // One way in for anything that names a pool: poolId, token address, token
   // name, or a DexScreener link. While a result is showing it becomes the way
