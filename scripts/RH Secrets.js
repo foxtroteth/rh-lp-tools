@@ -39,9 +39,9 @@ module.exports = {
   // balance but no positions.
   BLOCKSCOUT_API_KEY: "",
 
-  // -- 4. Uniswap. Only needed for swapping. ----------------------------------
-  // Free at hub.uniswap.org. Opening, closing and re-entering positions all
-  // work without it. It is used by "Close and swap" and by Cleanup.
+  // -- 4. Uniswap. Required. --------------------------------------------------
+  // Free at hub.uniswap.org: sign in, create an API key and paste it here.
+  // RH Pool and RH Portfolio do not start without it.
   UNISWAP_API_KEY: "",
 
   // -- 5. Practice mode. ------------------------------------------------------

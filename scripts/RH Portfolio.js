@@ -8320,7 +8320,15 @@ function fillEmptyTable(t, message, refreshing, onRefresh, progress) {
 
 // Widgets render the same view as the tracker. Close buttons are UITable-only,
 // so nothing tappable can reach the home screen; closing needs the app.
-if (config.runsInWidget) {
+// Public build: a Uniswap API key is required.
+if (!config.runsInWidget && !String(secret("", "UNISWAP_API_KEY") || "").trim()) {
+  const __uniAlert = new Alert();
+  __uniAlert.title = "Uniswap API key required";
+  __uniAlert.message = "Add UNISWAP_API_KEY to RH Secrets, then run this script again. "
+    + "It is free at hub.uniswap.org.";
+  __uniAlert.addAction("OK");
+  await __uniAlert.presentAlert();
+} else if (config.runsInWidget) {
   let w;
   try {
     const fallback = new Promise(resolve => Timer.schedule(WIDGET_BUDGET_MS, false, () => {

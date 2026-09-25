@@ -165,6 +165,7 @@
     <ul class="small">
       <li><strong>"Set a wallet" or no buttons:</strong> RH Secrets is misnamed, or <code>PRIVATE_KEY</code> is empty or not 64 hex characters.</li>
       <li><strong>"ALCHEMY_API_KEY is required":</strong> the Alchemy key is missing, or you pasted the whole URL instead of just the key.</li>
+      <li><strong>"Uniswap API key required":</strong> fill in <code>UNISWAP_API_KEY</code> in RH Secrets and run the script again.</li>
       <li><strong>Balance shows but no positions:</strong> add a Blockscout key, then close and re-run the script.</li>
       <li><strong>Widget says it can't find a script:</strong> the widget's Script setting points at an old name. Pick it again.</li>
     </ul>
@@ -187,23 +188,24 @@
     <h3>3. Enter your keys</h3>
     <ol>
       <li>Tap <strong>RH Pool</strong>. The first time it offers to set up: tap <strong>Set up now</strong>.</li>
-      <li>Paste each key when asked: Alchemy, then your wallet private key, then Blockscout (see <a href="#keys">Getting your keys</a>). The Uniswap key is optional; tap Cancel to skip it.</li>
+      <li>Paste each key when asked: Alchemy, your wallet private key, Blockscout, then Uniswap (see <a href="#keys">Getting your keys</a>). The Uniswap key is required: without it the scripts stop and ask for it.</li>
       <li>Practice mode starts <strong>on</strong>: nothing is sent while you try things out.</li>
     </ol>
-    <p class="small muted">Change any of them later from <strong>⚙️ Settings</strong>, at the bottom of either script's menu. RH Pool and RH Portfolio share the same settings.</p>
+    <p class="small muted">Change any of them later from <strong>⚙️ Settings</strong>, at the bottom of either script's page. RH Pool and RH Portfolio share the same settings.</p>
 
     <h3>4. Using it</h3>
     <ul>
-      <li>On Android the table is a menu. Each pool, or each position, is one entry: tap it to see what you can do with it, such as the ⚡️ zap presets, ✏️ Custom, Re-enter, Claim, Close, or 🔗 open it in DexScreener.</li>
-      <li><strong>📄 Full table</strong> shows everything the iPhone table shows, in colour.</li>
-      <li>Every action asks first, showing the gas and the service fee, and shows each step once it finishes.</li>
-      <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. Later opens start from saved data and are quicker.</li>
+      <li>Each script opens as a page, like the iPhone table: one card per pool or per position, with its numbers and its buttons. Tap <strong>⚡ $amount</strong> or <strong>✏️ Custom</strong> to open a ladder, <strong>Claim</strong>, <strong>Close</strong> or <strong>Re-enter</strong> on a position, <strong>↗</strong> to open it in DexScreener.</li>
+      <li>At the top: <strong>↻ Refresh</strong>, <strong>🔎 Search</strong> and the <strong>Sort</strong> buttons. At the bottom: <strong>⚙️ Settings</strong>. Close the page with <strong>✕</strong> in its top corner.</li>
+      <li>The <strong>first</strong> time you tap a button, the app asks whether to open the link. Tick <strong>Don't show again</strong> and tap <strong>OK</strong>; after that, buttons respond straight away.</li>
+      <li>Every action asks first, showing the gas and the service fee. When it finishes, the page comes back with the result at the top.</li>
+      <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. RH Pool's buttons then answer in a second or two; RH Portfolio's reload your positions first, so they take a few seconds.</li>
     </ul>
 
     <h3>5. Practice, then go live</h3>
     <ol>
       <li>Try a zap in RH Pool and a claim in RH Portfolio. They show the plan, the gas and the fee, and send nothing.</li>
-      <li>When the numbers look right: ⚙️ Settings → <strong>Practice mode</strong> → <strong>Turn off</strong>. Close the shortcut and open it again.</li>
+      <li>When the numbers look right: ⚙️ Settings (bottom of the page) → <strong>Practice mode</strong> → <strong>Turn off</strong>.</li>
     </ol>
 
     <h3>6. Home screen (optional)</h3>
@@ -241,10 +243,10 @@
   <p>Sign up free at alchemy.com, create an app on <strong>Robinhood Chain</strong>, and copy the API key (the short string, not the URL) into <code>ALCHEMY_API_KEY</code>.</p>
   <h3>Wallet private key (required to transact)</h3>
   <p>Use a <strong>fresh wallet you keep only for this</strong>, holding only what you are willing to risk. The key stays on your phone: the scripts use it to sign locally and never send it anywhere. Anyone who can read the file can spend that wallet, so never share RH Secrets or paste the key anywhere else.</p>
+  <h3>Uniswap (required)</h3>
+  <p>Free at hub.uniswap.org: sign in, create an API key and copy it into <code>UNISWAP_API_KEY</code>. RH Pool and RH Portfolio do not start without it.</p>
   <h3>Blockscout (strongly recommended)</h3>
   <p>Free at blockscout.com. Without it, position lookups fall back to a public explorer that often times out: the symptom is a wallet that shows a balance but no positions.</p>
-  <h3>Uniswap (only for swaps)</h3>
-  <p>Free at hub.uniswap.org. Needed for "close and swap" and cleanup. Opening, claiming and closing work without it.</p>
 
   <h2>Questions</h2>
   <details><summary>What does "single-sided ladder" mean?</summary>
