@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RH LP Tools</title>
+<meta name="description" content="Scriptable widgets for Uniswap V4 liquidity on Robinhood Chain: find pools, open ladders, claim and close. Service fee disclosed below.">
+<style>
+  :root {
+    --bg: #f6f7f5; --card: #ffffff; --ink: #14171a; --muted: #5b6470; --line: #e3e6e1;
+    --accent: #0a7d4f; --accent-ink: #ffffff; --warn-bg: #fff7e6; --warn-line: #f0c36d; --code: #eef1ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1113; --card: #161a1d; --ink: #e8ebee; --muted: #9aa3ad; --line: #262c31;
+      --accent: #2fd08a; --accent-ink: #06140d; --warn-bg: #2a2212; --warn-line: #7a5a1c; --code: #1d2226;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1113; --card: #161a1d; --ink: #e8ebee; --muted: #9aa3ad; --line: #262c31;
+    --accent: #2fd08a; --accent-ink: #06140d; --warn-bg: #2a2212; --warn-line: #7a5a1c; --code: #1d2226;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.02em; }
+  h2 { font-size: 20px; margin: 40px 0 12px; }
+  h3 { font-size: 16px; margin: 20px 0 6px; }
+  p, li { color: var(--ink); }
+  .lede { color: var(--muted); font-size: 17px; margin: 0 0 24px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .fee { background: var(--warn-bg); border-color: var(--warn-line); }
+  .fee table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; }
+  .fee td { padding: 8px 0; border-bottom: 1px solid var(--warn-line); vertical-align: top; }
+  .fee td:last-child { text-align: right; font-weight: 600; padding-left: 12px; width: 42%; }
+  .fee td small { display: block; color: var(--muted); font-size: 13px; }
+  .fee tr:last-child td { border-bottom: 0; }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+  code { background: var(--code); padding: 1px 5px; border-radius: 5px; }
+  .addr { word-break: break-all; display: block; background: var(--code); padding: 8px 10px; border-radius: 8px; margin: 6px 0; }
+  .files { display: grid; gap: 12px; }
+  .file { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .file .name { font-weight: 600; }
+  .file .meta { color: var(--muted); font-size: 13px; }
+  .btns { display: flex; gap: 8px; }
+  button, .btn { appearance: none; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    border-radius: 10px; padding: 9px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  button:disabled { opacity: 0.5; cursor: default; }
+  ol, ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  details { border-top: 1px solid var(--line); padding: 12px 0; }
+  details:last-of-type { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 600; }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 13px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>RH LP Tools</h1>
+  <p class="lede">Scriptable scripts for Uniswap V4 liquidity on Robinhood Chain. Find USDG pools, open single-sided ladders, and claim, close or re-enter them from your iPhone.</p>
+
+  <section class="card fee" id="fees" aria-labelledby="fee-h">
+    <h2 id="fee-h" style="margin-top:0">Service fee</h2>
+    <p style="margin-top:0">These scripts are free to download. Using them to transact charges a fee:</p>
+    <table>
+      <tr><td>Open a position<small>RH Pool zap, or re-entry / roll in RH Portfolio</small></td><td>0.3 USDG per open</td></tr>
+      <tr><td>Claim fees or close<small>RH Portfolio</small></td><td>1.5% of the LP fees collected</td></tr>
+      <tr><td>Everything else<small>viewing, swaps, cleanup, practice mode</small></td><td>Free</td></tr>
+    </table>
+    <ul class="small">
+      <li>The 1.5% is of the <strong>LP fees</strong> you earned, never of your deposit. Fees earned in the other token are valued at the pool's live price and the cut is paid in USDG.</li>
+      <li>It is paid <strong>inside the same transaction</strong> as the action. If the action fails, no fee is paid.</li>
+      <li>If a claim or close returns too little USDG to cover the cut, the rest comes from USDG in your wallet. If there is none, the same 1.5% is taken from each fee token instead, so a fee can never stop you exiting.</li>
+      <li>Every confirmation screen shows the fee before you send, and the exact amount appears as its own step.</li>
+    </ul>
+    <p class="small" style="margin-bottom:4px">Fees go to:</p>
+    <span class="addr mono">0x95483e739bdbd2496ef569eaf1612370501011d1</span>
+    <p class="small muted" style="margin-bottom:0">You can check this yourself: open either script and search for <code>SERVICE_FEE_WALLET</code>.</p>
+  </section>
+
+  <h2>Download</h2>
+  <div class="files" id="files">
+    <div class="card file" data-file="RH Secrets.js">
+      <div><div class="name">RH Secrets</div><div class="meta">Your keys and settings. Set up once, never replaced.</div></div>
+      <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
+    </div>
+    <div class="card file" data-file="RH Pool.js">
+      <div><div class="name">RH Pool</div><div class="meta">Ranks USDG pools by fee yield and opens ladders in one tap. <span data-ver></span></div></div>
+      <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
+    </div>
+    <div class="card file" data-file="RH Portfolio.js">
+      <div><div class="name">RH Portfolio</div><div class="meta">Your positions, PnL and fees. Claim, close, swap and re-enter. <span data-ver></span></div></div>
+      <div class="btns"><button class="primary" data-copy>Copy code</button><a class="btn" data-dl>Open</a></div>
+    </div>
+  </div>
+
+  <h2>Setting up</h2>
+  <ol>
+    <li>Install <strong>Scriptable</strong> from the App Store (free).</li>
+    <li>In Scriptable, tap <strong>+</strong> to make a new script. Name it exactly <code>RH Secrets</code>. Tap <em>Copy code</em> above for RH Secrets and paste it in.</li>
+    <li>Fill in your keys in RH Secrets (see below). Leave <code>PRACTICE_MODE: true</code> for now.</li>
+    <li>Make two more scripts named exactly <code>RH Pool</code> and <code>RH Portfolio</code>, and paste each one's code in.</li>
+    <li>Run each script once from inside Scriptable. Try every button in practice mode: it shows the plan, the gas and the service fee, and sends nothing.</li>
+    <li>When the numbers look right, set <code>PRACTICE_MODE: false</code> in RH Secrets.</li>
+    <li>Optional: add a Scriptable widget to your home screen and pick RH Pool or RH Portfolio as its script.</li>
+  </ol>
+
+  <h2>Getting your keys</h2>
+  <h3>Alchemy (required)</h3>
+  <p>Sign up free at alchemy.com, create an app on <strong>Robinhood Chain</strong>, and copy the API key (the short string, not the URL) into <code>ALCHEMY_API_KEY</code>.</p>
+  <h3>Wallet private key (required to transact)</h3>
+  <p>Use a <strong>fresh wallet you keep only for this</strong>, holding only what you are willing to risk. The key stays on your phone: the scripts use it to sign locally and never send it anywhere. Anyone who can read the file can spend that wallet, so never share RH Secrets or paste the key anywhere else.</p>
+  <h3>Blockscout (strongly recommended)</h3>
+  <p>Free at blockscout.com. Without it, position lookups fall back to a public explorer that often times out: the symptom is a wallet that shows a balance but no positions.</p>
+  <h3>Uniswap (only for swaps)</h3>
+  <p>Free at hub.uniswap.org. Needed for "close and swap" and cleanup. Opening, claiming and closing work without it.</p>
+
+  <h2>Questions</h2>
+  <details><summary>What does "single-sided ladder" mean?</summary>
+    <p>You deposit only USDG, split across several slices placed below the current price. Nothing is bought up front, so there is no slippage on entry. The ladder earns fees only once the price falls into it, and as it does, your USDG is converted into the token.</p></details>
+  <details><summary>How is the 1.5% worked out exactly?</summary>
+    <p>Right before sending, RH Portfolio reads each position's uncollected fees from the chain, values any non-USDG part at the pool's current price, and takes 1.5% of the total, rounded up to the nearest 0.000001 USDG. That amount is paid to the fee wallet in the same transaction that collects the fees.</p></details>
+  <details><summary>Does re-entering or rolling cost both fees?</summary>
+    <p>Yes. A re-entry closes a ladder and opens a new one in one transaction, so it pays 1.5% of the fees collected plus 0.3 USDG for the re-open. A roll is the same, in separate steps.</p></details>
+  <details><summary>Positions don't show up</summary>
+    <p>Add a Blockscout key. The public explorer is slow and unreliable; with a key, lookups are fast. Newly opened positions can also take a minute to be indexed.</p></details>
+  <details><summary>How do I update?</summary>
+    <p>Copy the new code for RH Pool or RH Portfolio and paste it over the old script. RH Secrets is never replaced, so your keys and presets carry over.</p></details>
+
+  <h2>Risks</h2>
+  <ul class="small">
+    <li>Providing liquidity can lose money. If the price falls through your ladder, you end up holding the token at a lower value than the USDG you put in.</li>
+    <li>Many tokens on this chain are new, thin and volatile. Check a pool's TVL before depositing.</li>
+    <li>These scripts are provided as-is, without warranty. You sign every transaction and are responsible for it. Nothing here is financial advice.</li>
+  </ul>
+
+  <footer>Robinhood Chain (4663) · Uniswap V4 · not affiliated with Robinhood, Uniswap or Scriptable.</footer>
+</main>
+<script>
+  // Fetched once on load so "Copy code" can write to the clipboard straight
+  // from the tap. iOS Safari drops clipboard access if a fetch runs first.
+  const texts = {};
+  for (const card of document.querySelectorAll("[data-file]")) {
+    const file = card.dataset.file;
+    const url = "scripts/" + encodeURIComponent(file);
+    card.querySelector("[data-dl]").href = url;
+    const btn = card.querySelector("[data-copy]");
+    btn.disabled = true;
+    fetch(url).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
+      texts[file] = t;
+      btn.disabled = false;
+      const m = t.match(/^const VERSION\s*=\s*"([^"]+)"/m);
+      const v = card.querySelector("[data-ver]");
+      if (m && v) v.textContent = "· " + m[1].replace(/ · public$/, "");
+    }).catch(() => { btn.textContent = "Use Open"; });
+    btn.addEventListener("click", async () => {
+      const t = texts[file];
+      if (!t) return;
+      try {
+        await navigator.clipboard.writeText(t);
+      } catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+      }
+      const was = btn.textContent;
+      btn.textContent = "Copied";
+      setTimeout(() => { btn.textContent = was; }, 1600);
+    });
+  }
+</script>
+</body>
+</html>
