@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RH LP Tools</title>
-<meta name="description" content="Scriptable widgets for Uniswap V4 liquidity on Robinhood Chain: find pools, open ladders, claim and close. Service fee disclosed below.">
+<meta name="description" content="Scriptable widgets for Uniswap V4 liquidity on Robinhood Chain: find pools, open ladders, claim and close.">
 <style>
   :root {
     --bg: #f6f7f5; --card: #ffffff; --ink: #14171a; --muted: #5b6470; --line: #e3e6e1;
@@ -119,7 +119,7 @@
     <h3>4. Practice run</h3>
     <ol>
       <li>Tap <strong>Robinhood Pool</strong> in Scriptable's list to run it. The pool table loads (the first load can take a minute).</li>
-      <li>Tap a zap button on any pool. It shows the plan, the gas and the 0.3 USDG service fee, and sends nothing.</li>
+      <li>Tap a zap button on any pool. It shows the plan and the gas, and sends nothing.</li>
       <li>Run <strong>Robinhood Portfolio</strong> the same way and try Claim and Close on a position if you have one.</li>
       <li>When the numbers look right, open Robinhood Secrets, change <code>PRACTICE_MODE: true</code> to <code>false</code>, tap <strong>Done</strong>. From then on the buttons really send.</li>
     </ol>
@@ -174,13 +174,13 @@
       <li>Each script opens as a page, like the iPhone table: one card per pool or per position, with its numbers and its buttons. Tap <strong>⚡ $amount</strong> or <strong>✏️ Custom</strong> to open a ladder, <strong>Claim</strong>, <strong>Close</strong> or <strong>Re-enter</strong> on a position, <strong>↗</strong> to open it in DexScreener.</li>
       <li>At the top: <strong>↻ Refresh</strong>, <strong>🔎 Search</strong> and the <strong>Sort</strong> buttons. At the bottom: <strong>⚙️ Settings</strong>. Close the page with <strong>✕</strong> in its top corner.</li>
       <li>The <strong>first</strong> time you tap a button, the app asks whether to open the link. Tick <strong>Don't show again</strong> and tap <strong>OK</strong>; after that, buttons respond straight away.</li>
-      <li>Every action asks first, showing the gas and the service fee. When it finishes, the page comes back with the result at the top.</li>
+      <li>Every action asks first, showing the gas. When it finishes, the page comes back with the result at the top.</li>
       <li>The first load of each script can take a minute: short messages at the bottom of the screen say what it is doing. Robinhood Pool's buttons then answer in a second or two; Robinhood Portfolio's reload your positions first, so they take a few seconds.</li>
     </ul>
 
     <h3>5. Practice, then go live</h3>
     <ol>
-      <li>Try a zap in Robinhood Pool and a claim in Robinhood Portfolio. They show the plan, the gas and the fee, and send nothing.</li>
+      <li>Try a zap in Robinhood Pool and a claim in Robinhood Portfolio. They show the plan and the gas, and send nothing.</li>
       <li>When the numbers look right: ⚙️ Settings (bottom of the page) → <strong>Practice mode</strong> → <strong>Turn off</strong>.</li>
     </ol>
 
@@ -228,7 +228,7 @@
 
   <h2>Questions</h2>
   <details id="fees"><summary>How much is the service fee?</summary>
-    <p>The scripts are free to download. Using them to transact charges a service fee, the same on iPhone and Android: 0.3 USDG for each ladder you open, however many slices it has (a zap in Robinhood Pool, or a re-entry or roll in Robinhood Portfolio), and 1.5% of the LP fees collected each time you claim fees or close, never of your deposit. Everything else is free: viewing pools and positions, swaps, cleanup and every run in practice mode. The 1.5% is worked out right before sending: the uncollected fees are read from the chain, any non-USDG part is valued at the pool's current price, and the cut is rounded up to the nearest 0.000001 USDG and paid in USDG. If a claim or close returns too little USDG to cover it, the rest comes from USDG in your wallet; if there is none, the same 1.5% is taken from each fee token instead, so a fee can never stop you exiting. A re-entry or roll pays both: 1.5% of the fees collected plus 0.3 USDG for the re-open. The fee is paid inside the same transaction as the action, so if the action fails, no fee is paid, and the confirmation screen shows the exact amount before you send.</p></details>
+    <p>The scripts are free to download. Using them to transact charges a service fee, the same on iPhone and Android: 0.3 USDG for each ladder you open, however many slices it has (a zap in Robinhood Pool, or a re-entry or roll in Robinhood Portfolio), and 1.5% of the LP fees collected each time you claim fees or close, never of your deposit. Everything else is free: viewing pools and positions, swaps, cleanup and every run in practice mode. The 1.5% is worked out right before sending: the uncollected fees are read from the chain, any non-USDG part is valued at the pool's current price, and the cut is rounded up to the nearest 0.000001 USDG and paid in USDG. If a claim or close returns too little USDG to cover it, the rest comes from USDG in your wallet; if there is none, the same 1.5% is taken from each fee token instead, so a fee can never stop you exiting. A re-entry or roll pays both: 1.5% of the fees collected plus 0.3 USDG for the re-open. The fee is paid inside the same transaction as the action, so if the action fails, no fee is paid.</p></details>
   <details><summary>What does "single-sided ladder" mean?</summary>
     <p>You deposit only USDG, split across several slices placed below the current price. Nothing is bought up front, so there is no slippage on entry. The ladder earns fees only once the price falls into it, and as it does, your USDG is converted into the token.</p></details>
   <details><summary>Positions don't show up</summary>
